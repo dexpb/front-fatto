@@ -103,7 +103,7 @@ function App() {
     const adjustedDate = new Date(inputDataLimite);
     adjustedDate.setMinutes(adjustedDate.getMinutes() + adjustedDate.getTimezoneOffset());
   
-    await axios.put(`https://backend-g9px.onrender.com/tarefas${editTask.id}`, {
+    await axios.put(`https://backend-g9px.onrender.com/tarefas/${editTask.id}`, {
       nome: inputValue,
       custo: parseFloat(inputCusto),
       dataLimite: adjustedDate,
@@ -136,7 +136,7 @@ function App() {
   }
 
   async function deleteTask(task) {
-    await axios.delete(`https://backend-g9px.onrender.com/tarefas${task.id}`);
+    await axios.delete(`https://backend-g9px.onrender.com/tarefas/${task.id}`);
     getTasks();
   }
 
