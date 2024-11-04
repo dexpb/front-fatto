@@ -68,13 +68,18 @@ function App() {
       setErrorMessage("Nome da tarefa já existe!");
       return;
     }
-
+  
+    // Ajuste da data para evitar o problema do fuso horário
+    const adjustedDate = new Date(inputDataLimite);
+    adjustedDate.setMinutes(adjustedDate.getMinutes() + adjustedDate.getTimezoneOffset());
+  
     await axios.post("http://localhost:3333/tarefas", {
       nome: inputValue,
       custo: parseFloat(inputCusto),
-      dataLimite: inputDataLimite,
+      dataLimite: adjustedDate.toISOString(), // envia no formato ISO
       ordemApresentacao: tasks.length + 1,
     });
+  
     getTasks();
     setInputVisibility(false);
     setInputValue("");
@@ -82,6 +87,7 @@ function App() {
     setInputDataLimite("");
     setErrorMessage("");
   }
+  
 
   async function selectedEditTask() {
     if (!editTask) {
