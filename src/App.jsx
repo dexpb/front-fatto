@@ -54,12 +54,12 @@ function App() {
   }
 
   async function getTasks() {
-    const response = await axios.get("https://backend-g9px.onrender.com/tarefas");
+    const response = await axios.get("https://backend-production-3bc1.up.railway.app/tarefas");
     setTasks(response.data.sort((a, b) => a.ordemApresentacao - b.ordemApresentacao));
   }
 
   async function isTaskNameDuplicate(taskName) {
-    const response = await axios.get("https://backend-g9px.onrender.com/tarefas");
+    const response = await axios.get("https://backend-production-3bc1.up.railway.app/tarefas");
     return response.data.some(task => task.nome === taskName);
   }
 
@@ -73,7 +73,7 @@ function App() {
     const adjustedDate = new Date(inputDataLimite);
     adjustedDate.setMinutes(adjustedDate.getMinutes() + adjustedDate.getTimezoneOffset());
   
-    await axios.post("https://backend-g9px.onrender.com/tarefas", {
+    await axios.post("https://backend-production-3bc1.up.railway.app/tarefas", {
       nome: inputValue,
       custo: parseFloat(inputCusto),
       dataLimite: adjustedDate.toISOString(), // envia no formato ISO
@@ -103,7 +103,7 @@ function App() {
     const adjustedDate = new Date(inputDataLimite);
     adjustedDate.setMinutes(adjustedDate.getMinutes() + adjustedDate.getTimezoneOffset());
   
-    await axios.put(`https://backend-g9px.onrender.com/tarefas/${editTask.id}`, {
+    await axios.put(`https://backend-production-3bc1.up.railway.app/tarefas/${editTask.id}`, {
       nome: inputValue,
       custo: parseFloat(inputCusto),
       dataLimite: adjustedDate,
@@ -136,7 +136,7 @@ function App() {
   }
 
   async function deleteTask(task) {
-    await axios.delete(`https://backend-g9px.onrender.com/tarefas/${task.id}`);
+    await axios.delete(`https://backend-production-3bc1.up.railway.app/tarefas/${task.id}`);
     getTasks();
   }
 
